@@ -17,14 +17,14 @@ export default {
   // props: ["awakeNum", "closeNum", "devNum"],
   data() {
     return {
-      awakeNum: 1,
-      closeNum: 1,
-      devNum: 1
+      awakeNum: getNum('awakeNum'),
+      closeNum: getNum('closeNum'),
+      devNum: getNum('devNum')
     }
   },
   computed: {
-    getAwakeNum(){
-
+    getNum (num) {
+      return this.$store.getters.getNum(num)
     }
   }
 }

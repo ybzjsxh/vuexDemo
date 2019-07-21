@@ -1,3 +1,10 @@
-export const error1 = function({dispatch, state}, error) {
-  dispatch('ERROR1', error)
+export default {
+  setNum (context, num) {
+    context.commit('setNum', num)
+  },
+  error2 (context) {
+    context.commit('error2', 'payload2')
+  }
 }
+
+

@@ -5,17 +5,33 @@
       :dataSource="data"
       :pagination="false"
       :scroll={x:200}
+      :rowKey="setTableKey"
     >
-      <a-button
-        slot="operation"
-        type="primary"
-        slot-scope="text"
-        href="javascript:;"
-        @click="closeDevice"
-        :key="text"
+      <a-popconfirm
+        slot="operations"
+        title="确认关闭设备？"
+        @confirm="confirm"
+        @cancel="cancel"
+        okText="确定"
+        cancelText="取消"
       >
-        关闭设备
-      </a-button>
+        <a-button
+          type="danger"
+        >关闭设备</a-button>
+      </a-popconfirm>
+      <a-divider type="horizontal" />
+      <a-popconfirm
+        slot="operations"
+        title="确认关闭设备？"
+        @confirm="confirm"
+        @cancel="cancel"
+        okText="确定"
+        cancelText="取消"
+      >
+        <a-button
+          type="danger"
+        >开启设备</a-button>
+      </a-popconfirm>
     </a-table>
   </div>
 </template>
@@ -36,7 +52,6 @@ const columns = [
   {
     title: "名称",
     dataIndex: "name",
-    rowKey: "name",
     align: "center"
   },
   {
@@ -46,8 +61,8 @@ const columns = [
   },
   {
     title: "操作",
-    dataIndex: "operation",
-    scopedSlots: { customRender: 'operation' }
+    dataIndex: "operations",
+    scopedSlots: { customRender: 'operations' }
   }
 ]
 
@@ -65,11 +80,11 @@ export default {
       loading: false,
       close: true,
       data,
-      columns
+      columns,
     }
   },
   methods: {
-    closeDevice(index) {
+    closeDevice (index) {
       this.axios.get('/closeDevice', {
         params: {
           index
@@ -94,16 +109,29 @@ export default {
           index
         }
       })
-        .then(() => {
-          this.data = ({loading: true, data: [...this.data]});
-          setTimeout(() => {
-            this.data = ({loading: false});
-          }, 500)
-        })
-        .catch(err => {
-          this.$message.error('请求失败！')
-          console.log(err.message);
-        })
+      .then(() => {
+        this.data = ({loading: true, data: [...this.data]});
+        setTimeout(() => {
+          this.data = ({loading: false});
+        }, 500)
+      })
+      .catch(err => {
+        this.$message.error('请求失败！')
+        console.log(err.message);
+      })
+    },
+    confirm (e) {
+      this.$store.dispatch('error2', 'sdf')
+      // this.$store.commit('error1', 'sdf')
+      console.log(e, this.$store.state.err1);
+      this.$message.success('请求成功！')
+    },
+    cancel (e) {
+      console.log(e)
+      this.$message.warning('已取消！')
+    },
+    setTableKey (record) {
+      return record.ip;
     }
   },
   create() {
@@ -117,6 +145,7 @@ export default {
         .then(res => {
           // console.log(res);
           this.data = res.data;
+          this.$store.dispatch('setNum', res.data.length)
           // console.log(this.data);
           // this.props.setDevNum(res.data.length);
           // this.props.setCloseNum(getCloseNum(res.data).closeNum);

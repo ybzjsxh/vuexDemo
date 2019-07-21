@@ -2,17 +2,17 @@
   <div>
     <a-row type="flex" justify="center" align="top">
       <a-col :span="12" :xs="24" :md="16" :lg="12">
-        <Header></Header>
+        <Header />
       </a-col>
     </a-row>
     <a-row type="flex" justify="center" align="top">
       <a-col :span="12" :xs="24" :md="16" :lg="12">
-        <Status></Status>
+        <Status />
       </a-col>
     </a-row>
     <a-row type="flex" justify="center" align="top">
       <a-col :span="24" :xs="24" :md="16" :lg="12">
-        <Mbody></Mbody>
+        <Mbody />
       </a-col>
     </a-row>
   </div>

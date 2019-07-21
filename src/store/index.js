@@ -8,7 +8,12 @@ Vue.use(Vuex)
 
 const state = {
   err1: false,
-  err1: false,
+  err2: false,
+  num: {
+    awakeNum: 0,
+    closeNum: 0,
+    devNum: 0,
+  }
 }
 
 export default new Vuex.Store({
