@@ -22,7 +22,7 @@
       <a-divider type="horizontal" />
       <a-popconfirm
         slot="operations"
-        title="确认关闭设备？"
+        title="确认打开设备？"
         @confirm="confirm"
         @cancel="cancel"
         okText="确定"
@@ -103,23 +103,7 @@ export default {
     },
 
 
-    wakeDevice(index) {
-      this.axios.get('/wakeDevice', {
-        params: {
-          index
-        }
-      })
-      .then(() => {
-        this.data = ({loading: true, data: [...this.data]});
-        setTimeout(() => {
-          this.data = ({loading: false});
-        }, 500)
-      })
-      .catch(err => {
-        this.$message.error('请求失败！')
-        console.log(err.message);
-      })
-    },
+
     confirm (e) {
       this.$store.dispatch('error2', 'sdf')
       // this.$store.commit('error1', 'sdf')
@@ -145,7 +129,7 @@ export default {
         .then(res => {
           // console.log(res);
           this.data = res.data;
-          this.$store.dispatch('setNum', res.data.length)
+          this.$store.dispatch('setNum', { devNum: res.data.length } )
           // console.log(this.data);
           // this.props.setDevNum(res.data.length);
           // this.props.setCloseNum(getCloseNum(res.data).closeNum);

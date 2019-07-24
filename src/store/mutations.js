@@ -1,11 +1,8 @@
 export default{
-  setNum (state, num) {
-    return state.num.devNum = num;
+  setNum (state, payload) {
+    return state.num.devNum = payload.devNum;
   },
-  error1 (state) {
-    return state.err1 = true
-  },
-  error2 (state) {
-    return state.err2 = true
+  awakeDevice (state, num) {
+    return state.num.awakeNum += 1
   }
 }

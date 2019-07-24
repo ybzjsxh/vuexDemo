@@ -7,8 +7,8 @@ import getters from './getters';
 Vue.use(Vuex)
 
 const state = {
-  err1: false,
-  err2: false,
+  loading: false,
+  data: [],
   num: {
     awakeNum: 0,
     closeNum: 0,

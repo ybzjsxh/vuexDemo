@@ -1,5 +1,5 @@
 export default {
-  getNum: state => num => {
-    return state.num[num]
+  getNum: state => type => {
+    return state.num[type]
   }
 }
