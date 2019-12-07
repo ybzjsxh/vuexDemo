@@ -6,6 +6,7 @@
       :pagination="false"
       :scroll={x:200}
       :rowKey="setTableKey"
+      :locale="{emptyText: '暂无数据'}"
     >
       <a-popconfirm
         slot="operations"

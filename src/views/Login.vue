@@ -9,7 +9,7 @@
           class="login-form"
           @submit="handleSubmit"
         >
-          <a-form-item>
+          <!-- <a-form-item>
             <a-input
               v-decorator="[
                 'userName',
@@ -23,7 +23,7 @@
                 style="color: rgba(0,0,0,.25)"
               />
             </a-input>
-          </a-form-item>
+          </a-form-item>-->
           <a-form-item>
             <a-input
               v-decorator="[
@@ -32,22 +32,13 @@
               ]"
               type="password"
               placeholder="请输入密码"
+              autoFocus
             >
-              <a-icon
-                slot="prefix"
-                type="lock"
-                style="color: rgba(0,0,0,.25)"
-              />
+              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
             </a-input>
           </a-form-item>
           <a-form-item>
-            <a-button
-              type="primary"
-              html-type="submit"
-              class="login-form-button"
-            >
-              登录
-            </a-button>
+            <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
           </a-form-item>
         </a-form>
       </a-col>
@@ -56,54 +47,46 @@
 </template>
 
 <script>
-import Logo from '@/components/Logo'
-import axios from 'axios'
+import Logo from "@/components/Logo";
 
-import '../mock'
+import "../mock";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Login",
   data() {
-    return {
-      err1: this.$store.state.err1,
-      err2: this.$store.state.err2,
-    }
+    return {};
   },
-  beforeCreate () {
+  beforeCreate() {
     this.form = this.$form.createForm(this);
   },
+  computed: {
+    ...mapState(["loading", "err1", "err2"])
+  },
   methods: {
-    handleSubmit (e) {
+    ...mapActions(["login"]),
+    handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
+      this.form.validateFields(async (err, values) => {
         if (!err) {
-          axios.post('/login', {
-            pass: this.$form.pass
-          })
-            .then(response => {
-              console.log(response.data);
-              if (response.data.code === 200) {
-                this.$message.success('登陆成功！');
-                this.$router.push('/main');
-              } else {
-                this.err1 = true;
-                setTimeout(() => {
-                  this.err1 = false
-                }, 3000)
-              }
-            })
-            .catch(err => {
-              this.$message.error('服务异常！');
-              console.log(err.message);
-            })
+          const result = await this.login({pass:this.$form.pass});
+          if (result) {
+            this.$message.success("登陆成功！");
+            this.$router.push("/main");
+          } else {
+            this.err1 = true;
+            setTimeout(() => {
+              this.err1 = false;
+            }, 3000);
+          }
         } else {
-          this.err2 = true
+          this.err2 = true;
           setTimeout(() => {
-            this.err2=false
-          }, 3000)
+            this.err2 = false;
+          }, 3000);
         }
       });
-    },
+    }
   },
   components: {
     Logo
@@ -117,4 +100,8 @@ export default {
 #components-form-demo-normal-login .login-form-button {
   width: 100%;
 }
+
+/* .ant-form-explain {
+  text-align: left;
+} */
 </style>

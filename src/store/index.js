@@ -6,19 +6,22 @@ import getters from './getters';
 
 Vue.use(Vuex)
 
+const debug = process.env.NODE_ENV !== 'production';
+
 const state = {
   loading: false,
+  err1: false,
+  err2: false,
   data: [],
-  num: {
-    awakeNum: 0,
-    closeNum: 0,
-    devNum: 0,
-  }
+  awakeNum: 0,
+  closeNum: 0,
+  devNum: 0,
 }
 
 export default new Vuex.Store({
   state,
   mutations,
   actions,
-  getters
+  getters,
+  strict: debug
 })

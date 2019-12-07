@@ -1,5 +1,5 @@
 <template>
-  <H1 stype="text-align:center">Shutdown v2.5</H1>
+  <H1 style="text-align:center">Shutdown v2.5</H1>
 </template>
 
 <script>

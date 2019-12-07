@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import Header from '../components/Header'
+import Header from '@/components/Header'
 import Status from '@/components/Status'
-import Mbody from '../components/Mbody'
+import Mbody from '@/components/Mbody'
 export default {
   name: 'Main',
   components: {

@@ -10,8 +10,9 @@ export default {
 
 <style>
 img {
-  text-align: center;
+  display: flex;
   width: 96px;
+  margin: 0 auto;
 }
 </style>
 

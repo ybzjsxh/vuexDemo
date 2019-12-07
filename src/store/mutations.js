@@ -1,8 +1,20 @@
-export default{
-  setNum (state, payload) {
-    return state.num.devNum = payload.devNum;
+export default {
+  setError(state, payload) {
+    state.error = payload.error;
   },
-  awakeDevice (state, num) {
-    return state.num.awakeNum += 1
+  setLoading(state, payload) {
+    state.loading = payload.loading;
+  },
+  setNum(state, payload) {
+    state.devNum = payload.devNum;
+  },
+  setCloseNum(state, payload) {
+    state.closeNum += 1;
+  },
+  setAwakeNum(state, payload) {
+    state.awakeNum += 1;
+  },
+  setDevNum(state, payload) {
+    state.devNum += 1;
   }
-}
+};
