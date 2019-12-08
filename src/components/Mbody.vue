@@ -71,11 +71,6 @@ const data = []
 
 export default {
   name: 'Mbody',
-  props: {
-    // setDevNum,
-    // setCloseNum,
-    // setAwakeNum
-  },
   data() {
     return {
       loading: false,
@@ -108,7 +103,6 @@ export default {
     confirm (e) {
       this.$store.dispatch('error2', 'sdf')
       // this.$store.commit('error1', 'sdf')
-      console.log(e, this.$store.state.err1);
       this.$message.success('请求成功！')
     },
     cancel (e) {

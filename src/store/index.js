@@ -1,27 +1,19 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import mutations from './mutations';
-import actions from './actions';
-import getters from './getters';
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+import global from "./global";
+import login from "./login";
+import device from "./device";
 
-const debug = process.env.NODE_ENV !== 'production';
+Vue.use(Vuex);
 
-const state = {
-  loading: false,
-  err1: false,
-  err2: false,
-  data: [],
-  awakeNum: 0,
-  closeNum: 0,
-  devNum: 0,
-}
+const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  getters,
+  modules: {
+    login,
+    device,
+    global
+  },
   strict: debug
-})
+});

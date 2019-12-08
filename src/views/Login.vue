@@ -61,29 +61,24 @@ export default {
     this.form = this.$form.createForm(this);
   },
   computed: {
-    ...mapState(["loading", "err1", "err2"])
+    ...mapState(["loading"])
   },
   methods: {
     ...mapActions(["login"]),
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields(async (err, values) => {
+      this.form.validateFields((err, values) => {
         if (!err) {
-          const result = await this.login({pass:this.$form.pass});
-          if (result) {
-            this.$message.success("登陆成功！");
-            this.$router.push("/main");
-          } else {
-            this.err1 = true;
-            setTimeout(() => {
-              this.err1 = false;
-            }, 3000);
-          }
+          this.login({ pass: this.$form.pass })
+            .then(res => {
+              this.$message.success("登陆成功！");
+              this.$router.push("/main");
+            })
+            .catch(err => {
+              this.$message.error(err.data.msg);
+            });
         } else {
-          this.err2 = true;
-          setTimeout(() => {
-            this.err2 = false;
-          }, 3000);
+          this.$message.error(err);
         }
       });
     }
@@ -93,15 +88,11 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 #components-form-demo-normal-login .login-form {
   max-width: 300px;
 }
 #components-form-demo-normal-login .login-form-button {
   width: 100%;
 }
-
-/* .ant-form-explain {
-  text-align: left;
-} */
 </style>

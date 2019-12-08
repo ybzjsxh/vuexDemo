@@ -1,21 +1,11 @@
 import axios from "axios";
 
 export default {
-  async login({ commit, state }, { pass }) {
-    commit("setError", "");
-    commit("setLoading", true);
-    axios.post("/login", {
-      pass
-    });
-  },
-  setNum({ commit }, payload) {
-    commit("setNum", { devNum: payload.devNum });
-  },
-  error2({ commit }) {
-    commit("error2", "payload2");
+  setNum({ commit }, { devNum }) {
+    commit("setNum", { devNum });
   },
   wakeDevice(context, index) {
-    this.axios
+    axios
       .get("/wakeDevice", {
         params: {
           index

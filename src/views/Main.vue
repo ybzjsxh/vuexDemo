@@ -22,12 +22,17 @@
 import Header from '@/components/Header'
 import Status from '@/components/Status'
 import Mbody from '@/components/Mbody'
+import * as types from '../store/global/mutation_types'
+
 export default {
   name: 'Main',
   components: {
     Header,
     Status,
     Mbody
+  },
+  beforeDestroy() {
+    this.$store.commit(types.CLEAR_TOKEN)
   }
 }
 </script>

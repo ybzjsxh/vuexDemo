@@ -15,9 +15,6 @@
 import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   name: "Status",
-  mounted() {
-    // console.log(this.$store)
-  },
   methods: {
     getNum(type) {
       return this.$store.getters.getNum(type);
