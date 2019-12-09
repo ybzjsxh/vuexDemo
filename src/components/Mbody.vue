@@ -124,7 +124,7 @@ export default {
         .then(res => {
           // console.log(res);
           this.data = res.data;
-          this.$store.dispatch('setNum', { devNum: res.data.length } )
+          this.$store.commit('SET_NUM', { devNum: res.data.length } )
           // console.log(this.data);
           // this.props.setDevNum(res.data.length);
           // this.props.setCloseNum(getCloseNum(res.data).closeNum);

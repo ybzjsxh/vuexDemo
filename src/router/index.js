@@ -30,7 +30,6 @@ let router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(store);
   if (to.meta.requireAuth) {
     if (store.state.global.token) {
       next();
